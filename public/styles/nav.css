@@ -1,0 +1,25 @@
+nav{
+  height: 120px;
+  background-color: #4056A1;
+  color: #FFFFFF;
+  padding-left: 1.5em;
+  padding-right: 1.5em; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#title{
+  font-family:"Bungee" ,"sans-serif";
+  display: flex;
+font-size: xx-large;
+ }
+ #newContentLink{
+  font-family:"sans-serif";
+  display: flex;    
+ }
+ #nav-write-tweet{
+  display: flex;
+ flex-direction: column;
+ align-items: center;
+ 
+ }
