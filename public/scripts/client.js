@@ -1,5 +1,6 @@
 //const { text } = require("express");
 
+
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
@@ -9,7 +10,7 @@ $(document).ready(function () {
 // Fake data taken from initial-tweets.json
 
 const createTweetElement = function(tweetData){
-  let createddate =format(tweetData['created_at']);
+  let createddate =timeago.format(tweetData['created_at']);
   let $tweet = $(`  <article>
   <header>    
     <span>      
@@ -36,8 +37,11 @@ const renderTweets = function(tweets) {
   // calls createTweetElement for each tweet
   // takes return value and appends it to the tweets container
   if(Array.isArray(tweets)){
+    tweets.reverse();
+    $('.tweet-container').empty();
     tweets.forEach(element => {
-      $('#tweet-container').append(createTweetElement(element));
+     const $tweet = createTweetElement(element);        
+      $('.tweet-container').append($tweet);
     }); 
   } 
 };
@@ -63,6 +67,7 @@ const renderTweets = function(tweets) {
         success: function(data) { 
             // Ajax call completed successfully
             alert("Form Submited Successfully");
+            loadtweets();
         },
         error: function(data) {              
             // Some error in ajax call
