@@ -7,7 +7,12 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function () {
-// Fake data taken from initial-tweets.json
+
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 
 const createTweetElement = function(tweetData){
   let createddate =timeago.format(tweetData['created_at']);
@@ -19,7 +24,7 @@ const createTweetElement = function(tweetData){
     </span>  
   <span id="username">${tweetData['user']['handle']}</span>     
   </header>
-  <p>${tweetData['content']['text']}</p>
+  <p>${escape(tweetData['content']['text'])}</p>
   <hr/> 
   <footer >
     <div>${createddate}</div>
@@ -68,6 +73,7 @@ const renderTweets = function(tweets) {
             // Ajax call completed successfully
             alert("Form Submited Successfully");
             loadtweets();
+            textArea.val('');
         },
         error: function(data) {              
             // Some error in ajax call
@@ -84,4 +90,5 @@ const renderTweets = function(tweets) {
   });
  };
 
+ loadtweets();
 });
