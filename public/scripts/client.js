@@ -1,3 +1,5 @@
+//const { text } = require("express");
+
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
@@ -42,12 +44,17 @@ const renderTweets = function(tweets) {
 
 
 
-  const $button = $('#tweet-button');
-  $button.on('click', function () {
-    let queryStr;
-    let form = $('#tweet-form');
+   let form = $('#tweet-form');
     form.submit((event)=>{
-      event.preventDefault(); // prevent default behavior      
+      event.preventDefault(); // prevent default behavior    
+    let textArea = $("#tweet-text");      
+    if(!textArea.val() || textArea.val().length === 0){
+      alert("Tweet data is empty");
+      return;
+    }else if(textArea.val().length > 140){
+      alert("Tweet is too long!");
+      return ;
+    }  
       var url = form.attr('action');
       $.ajax({
         type: "POST",
@@ -63,7 +70,7 @@ const renderTweets = function(tweets) {
         }
     });
     });   
-  });
+  
  const loadtweets = function(){
   $.ajax('/tweets', { method: 'GET' })
   .then(function (moreTweets) {
