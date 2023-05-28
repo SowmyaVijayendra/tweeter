@@ -39,6 +39,7 @@ article header{
   flex-direction: row;
   justify-content: space-between; 
   background-color: transparent;
+  margin:0;
 }
 
 footer, #tweet-footer{

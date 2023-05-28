@@ -1,0 +1,18 @@
+/* Desktop styles */
+@media only screen and (min-width: 1024px) {
+  .content{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+   
+  }
+  header{
+    width: 33.3%;  
+    margin-right: 5%;
+    margin-top: 20%;
+  }
+  .container{
+    width: 66.7%;
+    margin-top:15%;
+  }
+  }
