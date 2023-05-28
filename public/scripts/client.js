@@ -6,12 +6,13 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function () {
+  //function to prevent XSS (Cross-Site scripting) with escaping 
   const escape = function (str) {
     let div = document.createElement("div");
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
-
+  //function to create tweet HTML element for the given data
   const createTweetElement = function (tweetData) {
     let createddate = timeago.format(tweetData["created_at"]);
     let $tweet = $(`  <article>
@@ -35,6 +36,7 @@ $(document).ready(function () {
 </article>`);
     return $tweet;
   };
+  //function to add newly created tweet element to the container
   const renderTweets = function (tweets) {
     // loops through tweets
     // calls createTweetElement for each tweet
@@ -48,32 +50,32 @@ $(document).ready(function () {
       });
     }
   };
-
+//Handling submit event of the form with ajax calls to dynamically update the page
   let form = $("#tweet-form");
   form.submit((event) => {
-    event.preventDefault(); // prevent default behavior
+    event.preventDefault(); // prevents default behavior of the event
     $(".error").empty();
-    $(".error").hide();
+    $(".error").hide(); // reset the error element before validation
     let textArea = $("#tweet-text");
-    if (!textArea.val() || textArea.val().length === 0) {
-      $(".error").append("Tweet data is empty");
+    if (!textArea.val() || textArea.val().length === 0) { // if tweet data is empty
+      $(".error").append("Tweet data is empty"); //show error message
       $(".error").slideDown(500);
       return;
-    } else if (textArea.val().length > 140) {
+    } else if (textArea.val().length > 140) { //if tweet message is more than 140 char
       $(".error").append("Tweet is too long!");
       $(".error").slideDown(500);
       return;
     }
     var url = form.attr("action");
-    $.ajax({
+    $.ajax({ //ajax call
       type: "POST",
       url: url,
       data: form.serialize(),
       success: function (data) {
         // Ajax call completed successfully
 
-        loadtweets();
-        textArea.val("");
+        loadtweets(); // fetch tweets from the server and load on UI
+        textArea.val(""); //clear the text area where tweet message is entered
       },
       error: function (data) {
         // Some error in ajax call
@@ -83,12 +85,13 @@ $(document).ready(function () {
     });
   });
 
+  //function to fetch tweets from server with ajax call and display them on UI
   const loadtweets = function () {
     $.ajax("/tweets", { method: "GET" }).then(function (moreTweets) {
       console.log("Success: ", moreTweets);
       renderTweets(moreTweets);
     });
   };
-  $(".error").hide();
-  loadtweets();
+  $(".error").hide(); // On loading the page, hide the error display section
+  loadtweets(); // on loading the page, load the tweets from server
 });
