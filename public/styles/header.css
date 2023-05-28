@@ -7,5 +7,9 @@ header{
   flex-direction: column;
   background-color: #cfba00;
   background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+  padding-left:2%;
+  padding-right:2%;
 }
-
+header h2{
+  text-align:center;
+}

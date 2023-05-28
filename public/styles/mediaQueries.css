@@ -1,18 +1,35 @@
 /* Desktop styles */
 @media only screen and (min-width: 1024px) {
-  .content{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-   
-  }
+ .content{
+  display:flex;
+  justify-content:space-between;
+ }
   header{
     width: 33.3%;  
     margin-right: 5%;
     margin-top: 20%;
+    float:left;
   }
   .container{
     width: 66.7%;
     margin-top:15%;
+   
   }
-  }
+}
+
+/* tablets and below*/
+@media only screen and (max-width: 1024px) {
+
+ nav{
+  background-color: #cfba00;
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+ }
+ .content{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+ }
+
+}
